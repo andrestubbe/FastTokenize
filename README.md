@@ -1,4 +1,4 @@
-# FastTokenizer — Lightweight Source Code Analysis [v0.1.0]
+﻿# FastTokenizer — Lightweight Source Code Analysis [v0.1.0]
 
 **Minimaler, deterministischer Tokenizer für Code- und Textstrukturen. Zero-Dependency, O(n), kleines stabiles TokenType-Set, sprachspezifische Scanner (Java/JSON/XML). Entwickelt für schnelle Preview- und Analyse-Pipelines.**
 
