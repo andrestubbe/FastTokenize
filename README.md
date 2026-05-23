@@ -2,10 +2,11 @@
 
 **Minimaler, deterministischer Tokenizer für Code- und Textstrukturen. Zero-Dependency, O(n), kleines stabiles TokenType-Set, sprachspezifische Scanner (Java/JSON/XML). Entwickelt für schnelle Preview- und Analyse-Pipelines.**
 
-[![Build](https://img.shields.io/github/actions/workflow/status/andrestubbe/FastTokenizer/maven.yml?branch=main)](https://github.com/andrestubbe/FastTokenizer/actions)
-[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
+[![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastTokenizer/releases/tag/v0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![JitPack](https://jitpack.io/v/andrestubbe/FastTokenizer.svg)](https://jitpack.io/#andrestubbe/FastTokenizer)
+[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
+[![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
 ---
 
