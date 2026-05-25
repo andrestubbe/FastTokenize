@@ -6,8 +6,12 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
+---
+
 **⚡ Minimal, deterministic tokenizer for code and text structures. Zero‑dependency, O(n), with a small and stable
 TokenType set and language‑specific scanners (Java/JSON/XML). Designed for fast preview and analysis pipelines.**
+
+---
 
 [![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
