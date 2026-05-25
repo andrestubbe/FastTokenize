@@ -11,6 +11,28 @@ TokenType set and language‑specific scanners (Java/JSON/XML). Designed for fas
 
 [![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
+---
+
+## Table of Contents
+
+- [TODO](#features)
+- [License](#license)
+
+---
+
+## Quick Start
+
+```java
+import fastpreview.api.FastPreview;
+import fastpreview.api.PreviewRequest;
+import fastpreview.api.PreviewResult;
+
+public class Demo {
+    public static void main(String[] args) {
+        // TODO
+    }
+}
+```
 
 ---
 
