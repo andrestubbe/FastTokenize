@@ -1,4 +1,4 @@
-﻿# FastTokenizer v0.1.0 [ALPHA] — Lightweight Source Code Analysis for Java
+# FastTokenizer v0.1.0 [ALPHA] � Lightweight Source Code Analysis for Java
 
 [![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastTokenizer/releases/tag/v0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,8 +8,8 @@
 
 ---
 
-**⚡ Minimal, deterministic tokenizer for code and text structures. Zero‑dependency, O(n), with a small and stable
-TokenType set and language‑specific scanners (Java/JSON/XML). Designed for fast preview and analysis pipelines.**
+**? Minimal, deterministic tokenizer for code and text structures. Zero-dependency, O(n), with a small and stable
+TokenType set and language-specific scanners (Java/JSON/XML). Designed for fast preview and analysis pipelines.**
 
 ---
 
@@ -44,7 +44,7 @@ public class Demo {
 
 * **[COMPILE.md](COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
 * **[REFERENCE.md](REFERENCE.md)**: Full API descriptions, border configurations, and codepoint index.
-* **[PHILOSOPHIE.md](docs/PHILOSOPHIE.md)**: The engineering rationale for zero-allocation performance.
+* **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: The engineering rationale for zero-allocation performance.
 * **[ROADMAP.md](docs/ROADMAP.md)**: Future milestones and planned features.
 
 ---
@@ -53,15 +53,15 @@ public class Demo {
 
 | Platform      | Status            |
 |---------------|-------------------|
-| Windows 10/11 | ✅ Fully Supported |
-| Linux         | 🚧 Planned        |
-| macOS         | 🚧 Planned        |
+| Windows 10/11 | ? Fully Supported |
+| Linux         | ?? Planned        |
+| macOS         | ?? Planned        |
 
 ---
 
 ## License
 
-MIT License — See [LICENSE](LICENSE) file for details.
+MIT License � See [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -74,4 +74,4 @@ MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 
-**Part of the FastJava Ecosystem** — *Making the JVM faster. Small package. Maximum speed. Zero bloat. 🚀📋*
+**Part of the FastJava Ecosystem** � *Making the JVM faster. Small package. Maximum speed. Zero bloat. ????*
