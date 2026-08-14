@@ -17,13 +17,6 @@ TokenType set and language-specific scanners (Java/JSON/XML). Designed for fast 
 
 ---
 
-## Table of Contents
-
-- [TODO](#features)
-- [License](#license)
-
----
-
 ## Quick Start
 
 ```java
@@ -39,6 +32,16 @@ public class Demo {
 ```
 
 ---
+
+---
+
+## Table of Contents
+
+- [TODO](#features)
+- [License](#license)
+
+---
+
 
 ## Documentation
 
