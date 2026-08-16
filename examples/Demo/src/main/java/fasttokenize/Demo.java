@@ -16,7 +16,7 @@ public class Demo {
     private static final int COLOR_METHOD   = 0x7AA2F7; // Blue
     private static final int COLOR_STRING   = 0x9ECE6A; // Green
     private static final int COLOR_NUMBER   = 0xFF9E64; // Orange
-    private static final int COLOR_COMMENT  = 0x565F89; // Muted Blue Gray (Unified Comment Color)
+    private static final int COLOR_COMMENT  = 0x565F89; // Muted Blue Gray
     private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
     private static final int COLOR_PUNCT    = 0xBB9AF7; // Light Purple
     private static final int COLOR_ANNOT    = 0xE0AF68; // Yellow
@@ -46,17 +46,23 @@ public class Demo {
             }
             """;
 
-        System.out.println("--- 1. Tokenizing Java Code ---");
+        System.out.println("--- 1. High-Speed Tokenization & Zero-Allocation Byte Stream ---");
         List<Token> tokens = FastTokenize.tokenize(Language.JAVA, javaCode);
+        byte[] styles = FastTokenize.tokenizeStyles(Language.JAVA, javaCode);
+
+        System.out.println("Extracted " + tokens.stream().filter(t -> t.getType() != TokenType.WHITESPACE).count() + " tokens & generated " + styles.length + " zero-allocation style byte IDs.\n");
         for (Token t : tokens) {
             if (t.getType() != TokenType.WHITESPACE) {
                 System.out.printf("[%12s] %s%n", t.getType(), t.getText().toString().replace("\n", "\\n"));
             }
         }
 
-        System.out.println("\n--- 2. High-Speed Zero-Allocation Style Byte Stream ---");
-        byte[] styles = FastTokenize.tokenizeStyles(Language.JAVA, javaCode);
-        System.out.println("Generated " + styles.length + " style IDs matching character offsets.");
+        System.out.println("\n--- 2. Auto-Detect Language from Filename (.cpp) ---");
+        String cppCode = "#include <iostream>\nint main() { std::cout << \"FastTokenize AVX2\"; return 0; }";
+        List<Token> cppTokens = FastTokenize.tokenizeForFile("main.cpp", cppCode);
+        cppTokens.stream()
+            .filter(t -> t.getType() != TokenType.WHITESPACE)
+            .forEach(t -> System.out.printf("[%12s] %s%n", t.getType(), t.getText()));
 
         System.out.println("\n--- 3. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
 
@@ -64,11 +70,9 @@ public class Demo {
         String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
-
         String[] lines = javaCode.split("\n", -1);
         int lineNum = 1;
 
-        // Render code block inside full Tokyo Night editor container (#1A1B26 background)
         for (String line : lines) {
             coloredOutput.append(bgCode);
 
@@ -77,7 +81,6 @@ public class Demo {
                          .append(String.format(" %2d | ", lineNum++));
 
             String trimmed = line.trim();
-            // Handle Javadoc/multiline comment continuation lines uniformly like CreamCLI
             boolean isCommentLine = trimmed.startsWith("/*") || trimmed.startsWith("/**") || trimmed.startsWith("*") || trimmed.startsWith("*/") || trimmed.startsWith("//");
 
             if (isCommentLine) {
@@ -104,7 +107,6 @@ public class Demo {
                 }
             }
 
-            // Fill line to padding width with Tokyo Night background
             int pad = Math.max(0, 64 - line.length());
             coloredOutput.append(" ".repeat(pad));
             coloredOutput.append(resetCode).append("\n");
