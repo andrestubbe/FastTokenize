@@ -60,11 +60,20 @@ public final class FastTokenize {
 
     /**
      * Scans source code into a zero-allocation byte array of TokenType IDs matching character positions.
+     * Automatically attempts AVX2 SIMD acceleration if native binary is loaded, with seamless pure Java fallback.
      */
     public static byte[] tokenizeStyles(Language language, CharSequence source) {
         if (source == null) {
             return new byte[0];
         }
+
+        if (fasttokenize.bridge.NativeTokenizeBridge.isNativeLoaded() && source instanceof String s) {
+            byte[] inputBytes = s.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            byte[] outputStyles = new byte[inputBytes.length];
+            fasttokenize.bridge.NativeTokenizeBridge.scanStylesSIMD(inputBytes, inputBytes.length, outputStyles, language.ordinal());
+            return outputStyles;
+        }
+
         CodeScanner scanner = SCANNERS.getOrDefault(language, SCANNERS.get(Language.JAVA));
         return scanner.scanStyles(source);
     }
