@@ -63,6 +63,7 @@ public class CreamCliTerminalRendererDemo {
 
 - [Why FastTokenize?](#why-fasttokenize)
 - [Key Features](#key-features)
+- [Real-World Use Cases](#real-world-use-cases)
 - [Supported Languages](#supported-languages)
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -89,6 +90,15 @@ Traditional syntax highlighters and tokenizers rely on heavy regex engines or fu
 * 🎨 **10+ Supported Languages** — Dedicated scanners for Java, C/C++, Python, C#, JS/TS, JSON, CSS, XML, and Markdown.
 * 🖌️ **Direct Terminal Style Integration** — Native byte-array style output for zero-copy terminal rendering.
 * 📂 **Comprehensive Test Corpus** — Fully validated against a complete language spectrum in `docs/samples`.
+
+---
+
+## Real-World Use Cases
+
+- 🧭 **CreamCLI Next-Gen Terminal Editor**: Power 60+ FPS zero-latency syntax highlighting and code line rendering in [CreamCLI](https://github.com/andrestubbe/Cream-CLI) without JVM Garbage Collection stalls.
+- 🤖 **FastAI & LLM Code Prompting**: Tokenize and filter code snippets into structured Token Streams before feeding them to local or cloud LLM models.
+- 🔍 **High-Speed Code Search & Indexing**: Extract method identifiers, classes, and annotations for instant indexing in `FastFileContentIndex` while skipping comments and strings.
+- 📄 **Terminal File Previews**: Generate instant colored ANSI / TUI previews for large source code files in `FastTerminal` and TUI dashboards.
 
 ---
 
