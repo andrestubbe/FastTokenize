@@ -170,6 +170,11 @@ Add the JitPack repository and dependency to your `pom.xml`:
         <artifactId>FastPointer</artifactId>
         <version>0.1.1</version>
     </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastMemory</artifactId>
+        <version>0.1.1</version>
+    </dependency>
 </dependencies>
 ```
 
@@ -185,6 +190,7 @@ dependencies {
     implementation 'com.github.andrestubbe:FastCore:0.1.0'
     implementation 'com.github.andrestubbe:FastSIMD:0.1.3'
     implementation 'com.github.andrestubbe:FastPointer:0.1.1'
+    implementation 'com.github.andrestubbe:FastMemory:0.1.1'
 }
 ```
 
@@ -196,9 +202,10 @@ Download the latest JARs directly to add them to your classpath:
 2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (Unified Native JNI Loader)
 3. 🚀 **[FastSIMD-0.1.3.jar](https://github.com/andrestubbe/FastSIMD/releases/download/0.1.3/FastSIMD-0.1.3.jar)** (Hardware Vector Engine)
 4. 📌 **[FastPointer-0.1.1.jar](https://github.com/andrestubbe/FastPointer/releases/download/0.1.1/FastPointer-0.1.1.jar)** (Native Off-Heap Memory Pointer)
+5. 💾 **[FastMemory-0.1.1.jar](https://github.com/andrestubbe/FastMemory/releases/download/0.1.1/FastMemory-0.1.1.jar)** (Aligned Native Allocator)
 
 > [!IMPORTANT]
-> `FastTokenize` integrates `FastCore`, `FastSIMD`, and `FastPointer` for 100% hardware-accelerated AVX2 SIMD scanning and zero-copy off-heap memory processing.
+> `FastTokenize` integrates `FastCore`, `FastSIMD`, `FastPointer`, and `FastMemory` for 100% hardware-accelerated AVX2 SIMD scanning and zero-copy aligned off-heap memory processing.
 
 ---
 
