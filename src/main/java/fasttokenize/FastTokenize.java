@@ -19,6 +19,9 @@ public final class FastTokenize {
         PythonScanner pythonScanner = new PythonScanner();
         CSharpScanner csharpScanner = new CSharpScanner();
         JsonScanner jsonScanner = new JsonScanner();
+        XmlScanner xmlScanner = new XmlScanner();
+        MarkdownScanner markdownScanner = new MarkdownScanner();
+        CssScanner cssScanner = new CssScanner();
 
         SCANNERS.put(Language.JAVA, javaScanner);
         SCANNERS.put(Language.CPP, cppScanner);
@@ -26,9 +29,9 @@ public final class FastTokenize {
         SCANNERS.put(Language.CSHARP, csharpScanner);
         SCANNERS.put(Language.JSON, jsonScanner);
         SCANNERS.put(Language.JAVASCRIPT, cppScanner);
-        SCANNERS.put(Language.CSS, cppScanner);
-        SCANNERS.put(Language.XML, jsonScanner);
-        SCANNERS.put(Language.MARKDOWN, javaScanner);
+        SCANNERS.put(Language.CSS, cssScanner);
+        SCANNERS.put(Language.XML, xmlScanner);
+        SCANNERS.put(Language.MARKDOWN, markdownScanner);
         SCANNERS.put(Language.PLAIN_TEXT, javaScanner);
     }
 
