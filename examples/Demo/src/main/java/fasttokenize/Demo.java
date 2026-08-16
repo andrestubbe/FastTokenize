@@ -5,50 +5,49 @@ import java.util.List;
 
 public class Demo {
 
-    // Catppuccin Macchiato / Mocha Cappuccino Dark Canvas (24-Bit RGB: #1E1E2E - Deep Espresso Mocha Dark)
-    private static final int PAPER_BG_R = 0x1E;
-    private static final int PAPER_BG_G = 0x1E;
-    private static final int PAPER_BG_B = 0x2E;
+    // Tokyo Night Dark Background (24-Bit RGB: #1A1B26)
+    private static final int BG_R = 0x1A;
+    private static final int BG_G = 0x1B;
+    private static final int BG_B = 0x26;
 
-    // Gutter Background (Slightly deeper Crust / Mantle #181825)
-    private static final int GUTTER_BG_R = 0x18;
-    private static final int GUTTER_BG_G = 0x18;
-    private static final int GUTTER_BG_B = 0x25;
+    // Tokyo Night Gutter Background (#16161E)
+    private static final int GUTTER_BG_R = 0x16;
+    private static final int GUTTER_BG_G = 0x16;
+    private static final int GUTTER_BG_B = 0x1E;
 
-    // Catppuccin Mocha / Cappuccino Dark Palette Foreground Colors (24-Bit RGB)
-    private static final int COLOR_KEYWORD  = 0xCBA6F7; // Mauve Light Lavender
-    private static final int COLOR_TYPE     = 0x89DCEB; // Sky / Light Cyan
-    private static final int COLOR_METHOD   = 0x89B4FA; // Soft Royal Blue
-    private static final int COLOR_STRING   = 0xA6E3A1; // Warm Soft Green
-    private static final int COLOR_NUMBER   = 0xF9E2AF; // Warm Creamy Yellow / Peach
-    private static final int COLOR_COMMENT  = 0x6C7086; // Muted Gray-Blue
-    private static final int COLOR_OPERATOR = 0x89DCEB; // Light Cyan
-    private static final int COLOR_PUNCT    = 0x9399B2; // Soft Lavender Gray
-    private static final int COLOR_ANNOT    = 0xF9E2AF; // Warm Peach Gold
-    private static final int COLOR_DEFAULT  = 0xCDD6F4; // Soft Creamy Text
+    // Tokyo Night Standard Palette Colors (24-Bit RGB)
+    private static final int COLOR_KEYWORD  = 0x9D7CD8; // Tokyo Night Violet / Purple
+    private static final int COLOR_TYPE     = 0x2AC3DE; // Tokyo Night Cyan
+    private static final int COLOR_METHOD   = 0x7AA2F7; // Tokyo Night Blue
+    private static final int COLOR_STRING   = 0x9ECE6A; // Tokyo Night Green
+    private static final int COLOR_NUMBER   = 0xFF9E64; // Tokyo Night Orange
+    private static final int COLOR_COMMENT  = 0x565F89; // Tokyo Night Comment Muted Blue-Gray
+    private static final int COLOR_OPERATOR = 0x89DDFF; // Tokyo Night Light Cyan
+    private static final int COLOR_PUNCT    = 0xBB9AF7; // Tokyo Night Light Purple
+    private static final int COLOR_ANNOT    = 0xE0AF68; // Tokyo Night Yellow
+    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Tokyo Night Foreground Soft Blue-White
 
     public static void main(String[] args) {
         System.out.println("=================================================");
         System.out.println("   FastTokenize 0.1.0 Multi-Language Demo");
         System.out.println("=================================================\n");
 
-        String javaCode = """
-package com.example.service;
-
-import java.util.List;
-
-/**
- * FastTokenize Catppuccin Cappuccino Dark Highlighting Demo
- */
-public class UserProcessor {
-    private static final int MAX_COUNT = 100;
-    private final String name = "Antigravity";
-
-    @Override
-    public String toString() {
-        return "Processor[" + this.name + "] count: " + MAX_COUNT;
-    }
-}""".trim();
+        String javaCode = "package com.example.service;\n" +
+                "\n" +
+                "import java.util.List;\n" +
+                "\n" +
+                "/**\n" +
+                " * FastTokenize Tokyo Night Dark Highlighting Demo\n" +
+                " */\n" +
+                "public class UserProcessor {\n" +
+                "    private static final int MAX_COUNT = 100;\n" +
+                "    private final String name = \"Antigravity\";\n" +
+                "\n" +
+                "    @Override\n" +
+                "    public String toString() {\n" +
+                "        return \"Processor[\" + this.name + \"] count: \" + MAX_COUNT;\n" +
+                "    }\n" +
+                "}";
 
         System.out.println("--- 1. Auto-Detect Language & Tokenize Java File (UserProcessor.java) ---");
         List<Token> tokens = FastTokenize.tokenizeForFile("UserProcessor.java", javaCode);
@@ -61,27 +60,24 @@ public class UserProcessor {
             }
         }
 
-        System.out.println("\n--- 2. Catppuccin Cappuccino Dark ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Tokyo Night Dark ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
-        String codeBgCode = FastANSI.bg(PAPER_BG_R, PAPER_BG_G, PAPER_BG_B);
+        String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
         String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
-        String[] lines = javaCode.split("\\r?\\n");
+        String[] lines = javaCode.split("\n", -1);
         int lineNum = 1;
 
         for (String line : lines) {
-            // Filter out any empty trailing line if present
-            if (line.isEmpty() && lineNum > lines.length) continue;
-
-            // 1. Gutter / Line Number with dark crust background (#181825)
+            // 1. Gutter / Line Number with dark gutter background (#16161E)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x6C, 0x70, 0x86))
+                         .append(FastANSI.fg(0x56, 0x5F, 0x89))
                          .append(String.format(" %2d | ", lineNum++))
                          .append(resetCode);
 
-            // 2. Code Area with Catppuccin Mocha / Cappuccino Dark Background (#1E1E2E)
+            // 2. Code Area with Tokyo Night Dark Background (#1A1B26)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
@@ -111,7 +107,7 @@ public class UserProcessor {
                 }
             }
 
-            int pad = Math.max(0, 120 - line.length());
+            int pad = Math.max(0, 100 - line.length());
             coloredOutput.append(" ".repeat(pad));
             coloredOutput.append(resetCode).append("\n");
         }
