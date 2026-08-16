@@ -109,7 +109,7 @@ public class Demo {
                 }
             }
 
-            int pad = Math.max(0, 64 - line.length());
+            int pad = Math.max(0, 120 - line.length());
             coloredOutput.append(" ".repeat(pad));
             coloredOutput.append(resetCode).append("\n");
         }
