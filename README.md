@@ -136,7 +136,7 @@ TokenizerBenchmark.benchmarkJavaTokenization     thrpt    5   85806.426 ±  4801
 
 ## Installation
 
-### Maven (JitPack)
+### Option 1: Maven (via JitPack)
 
 Add the JitPack repository and dependency to your `pom.xml`:
 
@@ -156,6 +156,27 @@ Add the JitPack repository and dependency to your `pom.xml`:
     </dependency>
 </dependencies>
 ```
+
+### Option 2: Gradle (via JitPack)
+
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.andrestubbe:FastTokenize:0.1.0'
+}
+```
+
+### Option 3: Direct Download (No Build Tool)
+
+Download the latest JAR directly to add it to your classpath:
+
+1. ⚡ **[FastTokenize-0.1.0.jar](https://github.com/andrestubbe/FastTokenize/releases/download/0.1.0/FastTokenize-0.1.0.jar)** (Tokenization Engine)
+
+> [!NOTE]
+> `FastTokenize` is standalone and zero-dependency. For hardware-accelerated AVX2 SIMD scanning on Windows x64, the native binary is automatically extracted at runtime.
 
 ---
 
