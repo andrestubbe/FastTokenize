@@ -2,18 +2,19 @@ package fasttokenize;
 
 /**
  * Supported programming languages and data formats for FastTokenize.
+ * Comprehensive coverage matching CreamCLI FileCategory extensions.
  */
 public enum Language {
-    JAVA("java", "kt"),
-    CPP("c", "cpp", "h", "hpp", "cc", "cxx", "hh"),
+    JAVA("java", "kt", "kts", "gradle", "groovy", "rs", "go", "sql"),
+    CPP("c", "cpp", "h", "hpp", "cc", "cxx", "hh", "bat", "cmd", "sh", "ps1"),
     PYTHON("py", "pyw", "pyi"),
     CSHARP("cs", "csx"),
     JAVASCRIPT("js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx"),
-    JSON("json"),
+    JSON("json", "yaml", "yml", "properties", "ini", "conf"),
     CSS("css", "scss", "less"),
     XML("xml", "html", "htm", "svg", "fxml"),
     MARKDOWN("md", "markdown"),
-    PLAIN_TEXT("txt");
+    PLAIN_TEXT("txt", "log", "gitignore", "env");
 
     private final String[] extensions;
 
