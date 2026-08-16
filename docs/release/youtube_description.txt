@@ -1,0 +1,38 @@
+⚡ FastTokenize 0.1.0 – High-Performance Zero-Allocation Multi-Language Lexer for Java
+
+Experience sub-microsecond, zero-allocation multi-language tokenization & syntax highlighting directly in the terminal! FastTokenize is built for extreme speed, powering modern CLI applications like CreamCLI with ultra-fast lexical analysis for Java, C++, Python, JavaScript, HTML, CSS, JSON, SQL and Markdown.
+
+---
+
+📌 Highlights & Key Features:
+
+• Zero-Allocation Tokenization: High-speed token streams generated via direct off-heap byte buffers with zero GC pressure.
+• 24-Bit ANSI TrueColor Rendering: Crisp terminal syntax highlighting featuring popular themes like Tokyo Night (rgb(36, 40, 59)), Rosé Pine Moon, and Catppuccin.
+• Multi-Language Auto-Detection: Instant code identification and token stream extraction for 10+ major programming languages.
+• Native Stack Integration: Built on top of the ultra-fast FastJava Ecosystem (FastCore, FastSIMD, FastPointer, FastMemory, and FastANSI).
+
+---
+
+💻 Demo Code Snippet:
+
+// Auto-Detect & Tokenize Java File
+List<Token> tokens = FastTokenize.tokenizeForFile("UserProcessor.java", javaCode);
+
+// Generate Zero-Allocation Style Byte Stream
+byte[] styles = FastTokenize.tokenizeStyles(Language.JAVA, javaCode);
+
+// High-speed 24-bit ANSI Output via FastANSI
+System.out.print(FastANSI.fg(122, 162, 247) + "public class UserProcessor");
+
+---
+
+🔗 Repositories & Resources:
+
+• FastTokenize GitHub: https://github.com/andrestubbe/FastTokenize
+• FastJava Ecosystem: https://github.com/andrestubbe/FastJava
+• CreamCLI Text Editor: https://github.com/andrestubbe/CreamCLI
+
+---
+
+🏷️ Tags / Keywords:
+#Java #FastJava #FastTokenize #SyntaxHighlighting #TokyoNight #TerminalUI #ANSI #Performance #ZeroAllocation #HighPerformanceJava #OpenSource #DeveloperTools #CreamCLI
