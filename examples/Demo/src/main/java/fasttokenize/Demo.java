@@ -5,10 +5,32 @@ import java.util.List;
 
 public class Demo {
 
-    // Distinct Blue 8-Bit Index Backgrounds (Guaranteed compatibility across Windows cmd/PowerShell ANSI)
-    // 17 = Deep Dark Navy Blue (Canvas #00005f)
-    // 18 = Darker Midnight Gutter (#000087)
-    // Or 4-bit standard ANSI: FastANSI.BG_BLUE (#0000AA)
+    // Exact CreamCLI Tokyo Night Editor Colors
+    // Editor Background: 0x222436 (#222436 - Deep Slate Navy Blue)
+    // Gutter Background: 0x1A1B2E (#1A1B2E - Darker Sidebar Navy)
+
+    private static final int BG_R = 0x22;
+    private static final int BG_G = 0x24;
+    private static final int BG_B = 0x36;
+
+    private static final int GUTTER_BG_R = 0x1A;
+    private static final int GUTTER_BG_G = 0x1B;
+    private static final int GUTTER_BG_B = 0x2E;
+
+    // Exact CreamCLI TokyoNightTheme RGB Constants
+    private static final int COLOR_KEYWORD  = 0xBB9AF7; // Light Violet
+    private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
+    private static final int COLOR_METHOD   = 0x7AA2F7; // Soft Blue
+    private static final int COLOR_FIELD    = 0x73DACA; // Teal
+    private static final int COLOR_STRING   = 0x9ECE6A; // Soft Green
+    private static final int COLOR_NUMBER   = 0xFF9E64; // Orange
+    private static final int COLOR_COMMENT  = 0x565F89; // Blue-Gray
+    private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
+    private static final int COLOR_PUNCT    = 0x9ABDF5; // Soft Purple Blue
+    private static final int COLOR_ANNOT    = 0xE0AF68; // Yellow
+    private static final int COLOR_THIS     = 0xF7768E; // Pinkish Red
+    private static final int COLOR_CONSTANT = 0xBB9AF7; // Light Violet
+    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Foreground Blue-White
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -20,7 +42,7 @@ public class Demo {
                 "import java.util.List;\n" +
                 "\n" +
                 "/**\n" +
-                " * FastTokenize Deep Blue Highlighting Demo\n" +
+                " * FastTokenize CreamCLI Tokyo Night Highlighting Demo\n" +
                 " */\n" +
                 "public class UserProcessor {\n" +
                 "    private static final int MAX_COUNT = 100;\n" +
@@ -43,36 +65,44 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Deep Blue ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. CreamCLI Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
 
-        // Use 4-bit and 8-bit ANSI background codes for 100% reliable terminal rendering on Windows cmd
-        String gutterBgCode = FastANSI.bg(18); // Dark Navy Blue Gutter
-        String codeBgCode   = FastANSI.bg(17); // Deep Ocean Blue Editor Canvas
-        String resetCode    = FastANSI.RESET;
+        String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
+        String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
+        String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
         String[] lines = javaCode.split("\n", -1);
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with dark navy background
+            // 1. Gutter / Line Number with CreamCLI Tokyo Night gutter background (0x1A1B2E)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(14)) // Bright Cyan line numbers
-                         .append(String.format(" %2d | ", lineNum++));
+                         .append(FastANSI.fg(0x3A, 0x41, 0x60)) // Editor line numbers color (0x3a4160)
+                         .append(String.format(" %2d | ", lineNum++))
+                         .append(resetCode);
 
-            // 2. Code Area with Deep Ocean Blue Background
+            // 2. Code Area with CreamCLI Tokyo Night Editor background (0x222436)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
             boolean isCommentLine = trimmed.startsWith("/*") || trimmed.startsWith("/**") || trimmed.startsWith("*") || trimmed.startsWith("*/") || trimmed.startsWith("//");
 
             if (isCommentLine) {
-                coloredOutput.append(FastANSI.fg(10)).append(FastANSI.ITALIC).append(line); // Bright Green Comments
+                int r = (COLOR_COMMENT >> 16) & 0xFF;
+                int g = (COLOR_COMMENT >> 8) & 0xFF;
+                int b = COLOR_COMMENT & 0xFF;
+                coloredOutput.append(FastANSI.fg(r, g, b)).append(FastANSI.ITALIC).append(line);
             } else {
                 List<Token> currentLineTokens = FastTokenize.tokenize(Language.JAVA, line);
                 for (Token t : currentLineTokens) {
                     String text = t.getText().toString();
-                    coloredOutput.append(mapTokenToAnsiFg(t.getType()));
+                    int rgb = mapTokenToColor(t.getType());
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
+
+                    coloredOutput.append(FastANSI.fg(r, g, b));
                     if (t.getType() == TokenType.KEYWORD) {
                         coloredOutput.append(FastANSI.BOLD);
                     } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
@@ -90,20 +120,21 @@ public class Demo {
         System.out.print(coloredOutput.toString());
     }
 
-    private static String mapTokenToAnsiFg(TokenType type) {
+    private static int mapTokenToColor(TokenType type) {
         return switch (type) {
-            case KEYWORD, PREPROCESSOR -> FastANSI.fg(13); // Bright Magenta / Purple
-            case TYPE, TAG, ATTRIBUTE -> FastANSI.fg(11);  // Bright Yellow / Cyan
-            case METHOD -> FastANSI.fg(14);                // Bright Cyan
-            case STRING -> FastANSI.fg(10);                // Bright Green
-            case NUMBER -> FastANSI.fg(9);                 // Bright Red / Orange
-            case COMMENT -> FastANSI.fg(8);                // Muted Gray
-            case OPERATOR -> FastANSI.fg(14);               // Bright Cyan
-            case PUNCTUATION -> FastANSI.fg(15);            // Bright White
-            case ANNOTATION -> FastANSI.fg(11);             // Bright Yellow
-            case THIS -> FastANSI.fg(13);                   // Bright Magenta
-            case CONSTANT -> FastANSI.fg(9);                // Bright Red
-            default -> FastANSI.fg(15);                     // Bright White Text
+            case KEYWORD, PREPROCESSOR -> COLOR_KEYWORD;
+            case TYPE, TAG, ATTRIBUTE -> COLOR_TYPE;
+            case METHOD -> COLOR_METHOD;
+            case FIELD -> COLOR_FIELD;
+            case STRING -> COLOR_STRING;
+            case NUMBER -> COLOR_NUMBER;
+            case COMMENT -> COLOR_COMMENT;
+            case OPERATOR -> COLOR_OPERATOR;
+            case PUNCTUATION -> COLOR_PUNCT;
+            case ANNOTATION -> COLOR_ANNOT;
+            case THIS -> COLOR_THIS;
+            case CONSTANT -> COLOR_CONSTANT;
+            default -> COLOR_DEFAULT;
         };
     }
 }
