@@ -16,7 +16,7 @@ public class Demo {
     private static final int COLOR_METHOD   = 0x7AA2F7; // Blue
     private static final int COLOR_STRING   = 0x9ECE6A; // Green
     private static final int COLOR_NUMBER   = 0xFF9E64; // Orange
-    private static final int COLOR_COMMENT  = 0x565F89; // Muted Blue Gray
+    private static final int COLOR_COMMENT  = 0x565F89; // Muted Blue Gray (Unified Comment Color)
     private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
     private static final int COLOR_PUNCT    = 0xBB9AF7; // Light Purple
     private static final int COLOR_ANNOT    = 0xE0AF68; // Yellow
@@ -76,21 +76,32 @@ public class Demo {
             coloredOutput.append(FastANSI.fg(0x56, 0x5F, 0x89))
                          .append(String.format(" %2d | ", lineNum++));
 
-            List<Token> currentLineTokens = FastTokenize.tokenize(Language.JAVA, line);
-            for (Token t : currentLineTokens) {
-                String text = t.getText().toString();
-                int rgb = mapTokenToColor(t.getType());
-                int r = (rgb >> 16) & 0xFF;
-                int g = (rgb >> 8) & 0xFF;
-                int b = rgb & 0xFF;
+            String trimmed = line.trim();
+            // Handle Javadoc/multiline comment continuation lines uniformly like CreamCLI
+            boolean isCommentLine = trimmed.startsWith("/*") || trimmed.startsWith("/**") || trimmed.startsWith("*") || trimmed.startsWith("*/") || trimmed.startsWith("//");
 
-                coloredOutput.append(FastANSI.fg(r, g, b));
-                if (t.getType() == TokenType.KEYWORD) {
-                    coloredOutput.append(FastANSI.BOLD);
-                } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
-                    coloredOutput.append(FastANSI.ITALIC);
+            if (isCommentLine) {
+                int r = (COLOR_COMMENT >> 16) & 0xFF;
+                int g = (COLOR_COMMENT >> 8) & 0xFF;
+                int b = COLOR_COMMENT & 0xFF;
+                coloredOutput.append(FastANSI.fg(r, g, b)).append(line);
+            } else {
+                List<Token> currentLineTokens = FastTokenize.tokenize(Language.JAVA, line);
+                for (Token t : currentLineTokens) {
+                    String text = t.getText().toString();
+                    int rgb = mapTokenToColor(t.getType());
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
+
+                    coloredOutput.append(FastANSI.fg(r, g, b));
+                    if (t.getType() == TokenType.KEYWORD) {
+                        coloredOutput.append(FastANSI.BOLD);
+                    } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
+                        coloredOutput.append(FastANSI.ITALIC);
+                    }
+                    coloredOutput.append(text);
                 }
-                coloredOutput.append(text);
             }
 
             // Fill line to padding width with Tokyo Night background
