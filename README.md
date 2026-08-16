@@ -10,7 +10,7 @@
 
 **⚡ Minimal, deterministic, zero-dependency tokenization engine for code analysis, syntax highlighting, and LLM text pipelines. Operates in $O(n)$ time with zero-allocation byte-array output.**
 
-FastTokenize is a **high-performance, zero-dependency Java tokenization library** and part of the **FastJava ecosystem**. It provides dedicated scanners for 10+ programming languages and formats, outputting structured token streams and zero-allocation byte arrays for `FastTerminal` and CreamCLI.
+FastTokenize is a **high-performance, zero-dependency Java tokenization library** and part of the **FastJava ecosystem**. It provides dedicated scanners for 10+ programming languages and formats, outputting structured token streams and zero-allocation byte arrays for `FastTerminal` and terminal text applications.
 
 [![FastTokenize Showcase](docs/screenshot.png)](https://youtu.be/JPG-v0j8Irg)
 
@@ -24,10 +24,9 @@ import fasttokenize.Language;
 import fasttokenize.Token;
 import fasttokenize.TokenType;
 import fastterminal.FastTerminalScene;
-import cream.cli.view.editor.EditorCodeLine;
 
-public class CreamCliTerminalRendererDemo {
-    public static void renderCreamCodeLine(FastTerminalScene scene, String filename, String lineText, int lineY) {
+public class TerminalSyntaxRendererDemo {
+    public static void renderCodeLine(FastTerminalScene scene, String filename, String lineText, int lineY) {
         // 1. Instantly tokenize line into zero-allocation style/type IDs
         byte[] typeIds = FastTokenize.tokenizeStyles(Language.fromFilename(filename), lineText);
 
