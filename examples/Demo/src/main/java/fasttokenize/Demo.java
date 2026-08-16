@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Demo {
 
-    // Tokyo Night Palette Colors (TrueColor 24-Bit RGB)
+    // Tokyo Night Dark Background (24-Bit RGB: #1A1B26)
+    private static final int BG_R = 0x1A;
+    private static final int BG_G = 0x1B;
+    private static final int BG_B = 0x26;
+
+    // Tokyo Night Palette Foreground Colors (24-Bit RGB)
     private static final int COLOR_KEYWORD  = 0x9D7CD8; // Purple/Violet
     private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
     private static final int COLOR_METHOD   = 0x7AA2F7; // Blue
@@ -53,26 +58,48 @@ public class Demo {
         byte[] styles = FastTokenize.tokenizeStyles(Language.JAVA, javaCode);
         System.out.println("Generated " + styles.length + " style IDs matching character offsets.");
 
-        System.out.println("\n--- 3. Tokyo Night ANSI Colored Terminal Output (FastANSI) ---\n");
+        System.out.println("\n--- 3. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
+
+        String bgCode = FastANSI.bg(BG_R, BG_G, BG_B);
+        String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
-        for (Token t : tokens) {
-            String text = t.getText().toString();
-            int rgb = mapTokenToColor(t.getType());
-            int r = (rgb >> 16) & 0xFF;
-            int g = (rgb >> 8) & 0xFF;
-            int b = rgb & 0xFF;
 
-            if (t.getType() == TokenType.KEYWORD) {
-                coloredOutput.append(FastANSI.fg(r, g, b)).append(FastANSI.BOLD).append(text).append(FastANSI.RESET);
-            } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
-                coloredOutput.append(FastANSI.fg(r, g, b)).append(FastANSI.ITALIC).append(text).append(FastANSI.RESET);
-            } else {
-                coloredOutput.append(FastANSI.fg(r, g, b)).append(text).append(FastANSI.RESET);
+        String[] lines = javaCode.split("\n", -1);
+        int lineNum = 1;
+
+        // Render code block inside full Tokyo Night editor container (#1A1B26 background)
+        for (String line : lines) {
+            coloredOutput.append(bgCode);
+
+            // Gutter / Line number in muted gray
+            coloredOutput.append(FastANSI.fg(0x56, 0x5F, 0x89))
+                         .append(String.format(" %2d | ", lineNum++));
+
+            List<Token> currentLineTokens = FastTokenize.tokenize(Language.JAVA, line);
+            for (Token t : currentLineTokens) {
+                String text = t.getText().toString();
+                int rgb = mapTokenToColor(t.getType());
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+
+                coloredOutput.append(FastANSI.fg(r, g, b));
+                if (t.getType() == TokenType.KEYWORD) {
+                    coloredOutput.append(FastANSI.BOLD);
+                } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
+                    coloredOutput.append(FastANSI.ITALIC);
+                }
+                coloredOutput.append(text);
             }
+
+            // Fill line to padding width with Tokyo Night background
+            int pad = Math.max(0, 64 - line.length());
+            coloredOutput.append(" ".repeat(pad));
+            coloredOutput.append(resetCode).append("\n");
         }
 
-        System.out.println(coloredOutput.toString());
+        System.out.print(coloredOutput.toString());
     }
 
     private static int mapTokenToColor(TokenType type) {
