@@ -15,23 +15,28 @@ public final class NativeTokenizeBridge {
 
     static {
         try {
-            // Attempt loading from FastCore JNI environment or packaged DLL
-            String libName = System.mapLibraryName("fasttokenize");
-            InputStream in = NativeTokenizeBridge.class.getResourceAsStream("/win32-x86-64/" + libName);
-
-            if (in != null) {
-                File tempFile = File.createTempFile("fasttokenize_", "_" + libName);
-                tempFile.deleteOnExit();
-                Files.copy(in, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.load(tempFile.getAbsolutePath());
-                isNativeLoaded = true;
-            } else {
-                System.loadLibrary("fasttokenize");
-                isNativeLoaded = true;
-            }
+            // Attempt loading via FastCore unified JNI loader
+            fastcore.LibraryLoader.load("fasttokenize");
+            isNativeLoaded = true;
         } catch (Throwable t) {
-            // Pure Java fallback on macOS, Linux, or systems without AVX2 DLL
-            isNativeLoaded = false;
+            try {
+                // Direct fallback load attempt
+                String libName = System.mapLibraryName("fasttokenize");
+                InputStream in = NativeTokenizeBridge.class.getResourceAsStream("/win32-x86-64/" + libName);
+                if (in != null) {
+                    File tempFile = File.createTempFile("fasttokenize_", "_" + libName);
+                    tempFile.deleteOnExit();
+                    Files.copy(in, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    System.load(tempFile.getAbsolutePath());
+                    isNativeLoaded = true;
+                } else {
+                    System.loadLibrary("fasttokenize");
+                    isNativeLoaded = true;
+                }
+            } catch (Throwable fallbackThrowable) {
+                // Pure Java fallback on macOS, Linux, or systems without AVX2 DLL
+                isNativeLoaded = false;
+            }
         }
     }
 
