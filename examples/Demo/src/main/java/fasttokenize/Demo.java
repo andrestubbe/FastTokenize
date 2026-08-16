@@ -53,7 +53,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. CreamCLI Tokyo Night ANSI Syntax Highlighting (FastANSI) ---\n");
+        System.out.println("\n--- 2. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
 
         String resetCode = FastANSI.RESET;
         StringBuilder coloredOutput = new StringBuilder();
