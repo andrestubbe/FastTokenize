@@ -1,6 +1,7 @@
 package fasttokenize;
 
 import fasttokenize.scanner.*;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,8 @@ public final class FastTokenize {
         SCANNERS.put(Language.PLAIN_TEXT, javaScanner);
     }
 
-    private FastTokenize() {}
+    private FastTokenize() {
+    }
 
     /**
      * Tokenizes a source code string for a specified language.
