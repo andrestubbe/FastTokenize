@@ -12,7 +12,7 @@
 
 ---
 
-[![FastTokenize Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
+[![FastTokenize Showcase](docs/WindowsTerminal_kj94gfVAPj.gif)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
 ---
 
