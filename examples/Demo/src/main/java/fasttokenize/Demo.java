@@ -5,27 +5,27 @@ import java.util.List;
 
 public class Demo {
 
-    // Catppuccin Latte / Cappuccino Light Theme Background (24-Bit RGB: #EFF1F5 - Warm Creamy Latte Canvas)
-    private static final int PAPER_BG_R = 0xEF;
-    private static final int PAPER_BG_G = 0xF1;
-    private static final int PAPER_BG_B = 0xF5;
+    // Catppuccin Macchiato / Mocha Cappuccino Dark Canvas (24-Bit RGB: #1E1E2E - Deep Espresso Mocha Dark)
+    private static final int PAPER_BG_R = 0x1E;
+    private static final int PAPER_BG_G = 0x1E;
+    private static final int PAPER_BG_B = 0x2E;
 
-    // Gutter Background (Warm Crust / Mantle #E6E9EF)
-    private static final int GUTTER_BG_R = 0xE6;
-    private static final int GUTTER_BG_G = 0xE9;
-    private static final int GUTTER_BG_B = 0xEF;
+    // Gutter Background (Slightly deeper Crust / Mantle #181825)
+    private static final int GUTTER_BG_R = 0x18;
+    private static final int GUTTER_BG_G = 0x18;
+    private static final int GUTTER_BG_B = 0x25;
 
-    // Catppuccin Latte / Cappuccino Palette Foreground Colors (24-Bit RGB)
-    private static final int COLOR_KEYWORD  = 0x8839EF; // Mauve / Purple Accent
-    private static final int COLOR_TYPE     = 0x179299; // Teal / Blue Cyan
-    private static final int COLOR_METHOD   = 0x1E66F5; // Royal Blue
-    private static final int COLOR_STRING   = 0x40A02B; // Fresh Green
-    private static final int COLOR_NUMBER   = 0xFE640B; // Warm Peach / Orange
-    private static final int COLOR_COMMENT  = 0x9CA0B0; // Overlay 0 Muted Gray
-    private static final int COLOR_OPERATOR = 0xE64553; // Maroon / Red
-    private static final int COLOR_PUNCT    = 0x7C7F93; // Subtext 0 Muted Slate
-    private static final int COLOR_ANNOT    = 0xDF8E1D; // Yellow Gold
-    private static final int COLOR_DEFAULT  = 0x4C4F69; // Dark Text Main Foreground
+    // Catppuccin Mocha / Cappuccino Dark Palette Foreground Colors (24-Bit RGB)
+    private static final int COLOR_KEYWORD  = 0xCBA6F7; // Mauve Light Lavender
+    private static final int COLOR_TYPE     = 0x89DCEB; // Sky / Light Cyan
+    private static final int COLOR_METHOD   = 0x89B4FA; // Soft Royal Blue
+    private static final int COLOR_STRING   = 0xA6E3A1; // Warm Soft Green
+    private static final int COLOR_NUMBER   = 0xF9E2AF; // Warm Creamy Yellow / Peach
+    private static final int COLOR_COMMENT  = 0x6C7086; // Muted Gray-Blue
+    private static final int COLOR_OPERATOR = 0x89DCEB; // Light Cyan
+    private static final int COLOR_PUNCT    = 0x9399B2; // Soft Lavender Gray
+    private static final int COLOR_ANNOT    = 0xF9E2AF; // Warm Peach Gold
+    private static final int COLOR_DEFAULT  = 0xCDD6F4; // Soft Creamy Text
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -38,7 +38,7 @@ public class Demo {
             import java.util.List;
 
             /**
-             * FastTokenize Catppuccin Cappuccino Light Highlighting Demo
+             * FastTokenize Catppuccin Cappuccino Dark Highlighting Demo
              */
             public class UserProcessor {
                 private static final int MAX_COUNT = 100;
@@ -48,7 +48,7 @@ public class Demo {
                 public String toString() {
                     return "Processor[" + this.name + "] count: " + MAX_COUNT;
                 }
-            }"""; // Stripped trailing newline from text block to eliminate extra line 17
+            }""";
 
         System.out.println("--- 1. Auto-Detect Language & Tokenize Java File (UserProcessor.java) ---");
         List<Token> tokens = FastTokenize.tokenizeForFile("UserProcessor.java", javaCode);
@@ -61,7 +61,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Catppuccin Cappuccino Light ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Catppuccin Cappuccino Dark ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
         String codeBgCode = FastANSI.bg(PAPER_BG_R, PAPER_BG_G, PAPER_BG_B);
@@ -72,13 +72,13 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with warm crust background (#E6E9EF)
+            // 1. Gutter / Line Number with dark crust background (#181825)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x9C, 0xA0, 0xB0))
+                         .append(FastANSI.fg(0x6C, 0x70, 0x86))
                          .append(String.format(" %2d | ", lineNum++))
                          .append(resetCode);
 
-            // 2. Code Area with Catppuccin Latte / Cappuccino Light Background (#EFF1F5)
+            // 2. Code Area with Catppuccin Mocha / Cappuccino Dark Background (#1E1E2E)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
