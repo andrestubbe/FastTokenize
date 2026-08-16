@@ -5,17 +5,19 @@ import java.util.List;
 
 public class Demo {
 
-    // Requested Tokyo Night Storm Canvas Background: rgb(36, 40, 59) -> #24283B
-    private static final int BG_R = 36;
-    private static final int BG_G = 40;
-    private static final int BG_B = 59;
+    // Exact CreamCLI Tokyo Night Editor Colors
+    // Editor Background: rgb(34, 36, 54) -> 0x222436 (#222436)
+    // Gutter Background: rgb(26, 27, 46) -> 0x1A1B2E (#1A1B2E)
 
-    // Gutter Background: Slightly deeper navy rgb(31, 35, 53) -> #1F2335
-    private static final int GUTTER_BG_R = 31;
-    private static final int GUTTER_BG_G = 35;
-    private static final int GUTTER_BG_B = 53;
+    private static final int BG_R = 0x22;
+    private static final int BG_G = 0x24;
+    private static final int BG_B = 0x36;
 
-    // CreamCLI TokyoNightTheme 24-bit RGB Constants
+    private static final int GUTTER_BG_R = 0x1A;
+    private static final int GUTTER_BG_G = 0x1B;
+    private static final int GUTTER_BG_B = 0x2E;
+
+    // Exact CreamCLI TokyoNightTheme 24-bit RGB Constants
     private static final int COLOR_KEYWORD  = 0xBB9AF7; // Light Violet
     private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
     private static final int COLOR_METHOD   = 0x7AA2F7; // Soft Blue
@@ -40,7 +42,7 @@ public class Demo {
                 "import java.util.List;\n" +
                 "\n" +
                 "/**\n" +
-                " * FastTokenize Tokyo Night Highlighting Demo\n" +
+                " * FastTokenize CreamCLI Tokyo Night Highlighting Demo\n" +
                 " */\n" +
                 "public class UserProcessor {\n" +
                 "    private static final int MAX_COUNT = 100;\n" +
@@ -74,12 +76,12 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with darker navy gutter background rgb(31, 35, 53)
+            // 1. Gutter / Line Number with CreamCLI Tokyo Night gutter background (0x1A1B2E)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x56, 0x5F, 0x89))
+                         .append(FastANSI.fg(0x3A, 0x41, 0x60)) // Line numbers color (0x3a4160)
                          .append(String.format(" %2d | ", lineNum++));
 
-            // 2. Code Area with requested rgb(36, 40, 59) background
+            // 2. Code Area with CreamCLI Tokyo Night Editor background (0x222436)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
