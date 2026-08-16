@@ -17,14 +17,14 @@ public final class FastTokenize {
         JavaScanner javaScanner = new JavaScanner();
         CppScanner cppScanner = new CppScanner();
         PythonScanner pythonScanner = new PythonScanner();
+        CSharpScanner csharpScanner = new CSharpScanner();
         JsonScanner jsonScanner = new JsonScanner();
 
         SCANNERS.put(Language.JAVA, javaScanner);
         SCANNERS.put(Language.CPP, cppScanner);
         SCANNERS.put(Language.PYTHON, pythonScanner);
+        SCANNERS.put(Language.CSHARP, csharpScanner);
         SCANNERS.put(Language.JSON, jsonScanner);
-        // Fallbacks
-        SCANNERS.put(Language.CSHARP, javaScanner);
         SCANNERS.put(Language.JAVASCRIPT, cppScanner);
         SCANNERS.put(Language.CSS, cppScanner);
         SCANNERS.put(Language.XML, jsonScanner);
