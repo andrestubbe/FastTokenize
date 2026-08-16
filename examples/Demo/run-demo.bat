@@ -6,11 +6,8 @@ reg add "HKCU\Console" /v VirtualTerminalLevel /t REG_DWORD /d 1 /f >nul 2>&1
 echo Building and running FastTokenize Demo...
 
 cd /d "%~dp0"
-call mvn clean package -DskipTests >nul 2>&1
+call mvn clean compile dependency:build-classpath -Dmdep.outputFile=cp.txt -DincludeScope=runtime -q
+if %ERRORLEVEL% NEQ 0 ( echo [ERROR] Compile failed. & pause & exit /b %ERRORLEVEL% )
 
-if %errorlevel% neq 0 (
-    echo [ERROR] Build failed!
-    exit /b 1
-)
-
-call mvn -q compile exec:java "-Dexec.mainClass=fasttokenize.Demo"
+set /p CP=<cp.txt
+java --enable-native-access=ALL-UNNAMED -cp "target\classes;%CP%" fasttokenize.Demo
