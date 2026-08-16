@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FastTokenizerConfig",
+  "version": "1.0.0",
+  "settings": {
+    "enabled": true,
+    "maxThreads": 8,
+    "bufferSizeBytes": 1048576,
+    "performanceMode": "AVX2_SIMD",
+    "languagesSupported": [
+      "Java",
+      "C++",
+      "Python",
+      "C#",
+      "JavaScript",
+      "TypeScript",
+      "CSS",
+      "JSON",
+      "Markdown",
+      "XML"
+    ],
+    "thresholds": {
+      "timeoutMs": 250.5,
+      "maxErrors": 0
+    }
+  },
+  "metadata": null
+}

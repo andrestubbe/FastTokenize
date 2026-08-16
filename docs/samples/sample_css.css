@@ -1,0 +1,33 @@
+/* FastTokenizer Spectrum Test Sample: CSS */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+:root {
+    --primary-color: #007acc;
+    --background-dark: #1e1e1e;
+    --text-light: #f4f4f4;
+    --border-radius: 8px;
+    --font-mono: 'Fira Code', monospace;
+}
+
+body.cream-cli-theme {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Editor Container Rules */
+.editor-container > .code-line:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--primary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .editor-container {
+        font-size: 12px;
+        padding: 4px !important;
+    }
+}
