@@ -5,17 +5,15 @@ import java.util.List;
 
 public class Demo {
 
-    // Exact CreamCLI Tokyo Night Editor Colors
-    // Editor Background: 0x222436 (#222436 - Deep Slate Navy Blue)
-    // Gutter Background: 0x1A1B2E (#1A1B2E - Darker Sidebar Navy)
+    // Extra Rich & Vivid Tokyo Night Blue Background (RGB: #1E2238 - Rich Slate Navy Blue)
+    private static final int BG_R = 0x1E;
+    private static final int BG_G = 0x22;
+    private static final int BG_B = 0x38;
 
-    private static final int BG_R = 0x22;
-    private static final int BG_G = 0x24;
-    private static final int BG_B = 0x36;
-
-    private static final int GUTTER_BG_R = 0x1A;
-    private static final int GUTTER_BG_G = 0x1B;
-    private static final int GUTTER_BG_B = 0x2E;
+    // Gutter Background (Deeper Rich Blue #161828)
+    private static final int GUTTER_BG_R = 0x16;
+    private static final int GUTTER_BG_G = 0x18;
+    private static final int GUTTER_BG_B = 0x28;
 
     // Exact CreamCLI TokyoNightTheme RGB Constants
     private static final int COLOR_KEYWORD  = 0xBB9AF7; // Light Violet
@@ -76,13 +74,12 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with CreamCLI Tokyo Night gutter background (0x1A1B2E)
+            // 1. Gutter / Line Number with CreamCLI Tokyo Night gutter background
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x3A, 0x41, 0x60)) // Editor line numbers color (0x3a4160)
-                         .append(String.format(" %2d | ", lineNum++))
-                         .append(resetCode);
+                         .append(FastANSI.fg(0x59, 0x64, 0x91)) // Editor line numbers color
+                         .append(String.format(" %2d | ", lineNum++));
 
-            // 2. Code Area with CreamCLI Tokyo Night Editor background (0x222436)
+            // 2. Code Area with CreamCLI Tokyo Night Editor background
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
@@ -102,7 +99,8 @@ public class Demo {
                     int g = (rgb >> 8) & 0xFF;
                     int b = rgb & 0xFF;
 
-                    coloredOutput.append(FastANSI.fg(r, g, b));
+                    // Apply foreground color AND re-enforce background color per token to prevent terminal reset overrides
+                    coloredOutput.append(codeBgCode).append(FastANSI.fg(r, g, b));
                     if (t.getType() == TokenType.KEYWORD) {
                         coloredOutput.append(FastANSI.BOLD);
                     } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
