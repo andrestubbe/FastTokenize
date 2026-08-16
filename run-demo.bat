@@ -15,4 +15,3 @@ echo Running FastTokenize Demo...
 cd examples\Demo
 call run-demo.bat
 cd ..\..
-pause
