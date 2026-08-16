@@ -154,6 +154,22 @@ Add the JitPack repository and dependency to your `pom.xml`:
         <artifactId>FastTokenize</artifactId>
         <version>0.1.0</version>
     </dependency>
+    <!-- Hardware acceleration & native JNI dependencies -->
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastCore</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastSIMD</artifactId>
+        <version>0.1.3</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastPointer</artifactId>
+        <version>0.1.1</version>
+    </dependency>
 </dependencies>
 ```
 
@@ -166,17 +182,23 @@ repositories {
 
 dependencies {
     implementation 'com.github.andrestubbe:FastTokenize:0.1.0'
+    implementation 'com.github.andrestubbe:FastCore:0.1.0'
+    implementation 'com.github.andrestubbe:FastSIMD:0.1.3'
+    implementation 'com.github.andrestubbe:FastPointer:0.1.1'
 }
 ```
 
 ### Option 3: Direct Download (No Build Tool)
 
-Download the latest JAR directly to add it to your classpath:
+Download the latest JARs directly to add them to your classpath:
 
 1. ⚡ **[FastTokenize-0.1.0.jar](https://github.com/andrestubbe/FastTokenize/releases/download/0.1.0/FastTokenize-0.1.0.jar)** (Tokenization Engine)
+2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (Unified Native JNI Loader)
+3. 🚀 **[FastSIMD-0.1.3.jar](https://github.com/andrestubbe/FastSIMD/releases/download/0.1.3/FastSIMD-0.1.3.jar)** (Hardware Vector Engine)
+4. 📌 **[FastPointer-0.1.1.jar](https://github.com/andrestubbe/FastPointer/releases/download/0.1.1/FastPointer-0.1.1.jar)** (Native Off-Heap Memory Pointer)
 
-> [!NOTE]
-> `FastTokenize` is standalone and zero-dependency. For hardware-accelerated AVX2 SIMD scanning on Windows x64, the native binary is automatically extracted at runtime.
+> [!IMPORTANT]
+> `FastTokenize` integrates `FastCore`, `FastSIMD`, and `FastPointer` for 100% hardware-accelerated AVX2 SIMD scanning and zero-copy off-heap memory processing.
 
 ---
 
