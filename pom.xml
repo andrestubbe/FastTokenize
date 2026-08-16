@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.andrestubbe</groupId>
-    <artifactId>FastTokenizer</artifactId>
+    <artifactId>FastTokenize</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
 
-    <name>FastTokenizer</name>
+    <name>FastTokenize</name>
     <description>Minimaler, deterministischer Tokenizer für Code- und Textstrukturen. Zero-Dependency, O(n), kleines stabiles TokenType-Set, sprachspezifische Scanner (Java/JSON/XML). Entwickelt für schnelle Preview- und Analyse-Pipelines.</description>
 
     <properties>
