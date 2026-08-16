@@ -5,27 +5,27 @@ import java.util.List;
 
 public class Demo {
 
-    // Warm Paper Light Background (RGB: #F5EFEB - Soft Creamy Warm Paper)
-    private static final int PAPER_BG_R = 0xF5;
-    private static final int PAPER_BG_G = 0xEF;
-    private static final int PAPER_BG_B = 0xEB;
+    // Tokyo Purple Light Theme Background (24-Bit RGB: #F4F0F9 - Soft Pastel Lavender / Lilac Light)
+    private static final int PAPER_BG_R = 0xF4;
+    private static final int PAPER_BG_G = 0xF0;
+    private static final int PAPER_BG_B = 0xF9;
 
-    // Gutter Background (Slightly darker warm sepia #E8DFD8)
-    private static final int GUTTER_BG_R = 0xE8;
-    private static final int GUTTER_BG_G = 0xDF;
-    private static final int GUTTER_BG_B = 0xD8;
+    // Gutter Background (Slightly deeper pastel purple #E9E1F3)
+    private static final int GUTTER_BG_R = 0xE9;
+    private static final int GUTTER_BG_G = 0xE1;
+    private static final int GUTTER_BG_B = 0xF3;
 
-    // Paper / Warm Sepia Light Palette Foreground Colors (24-Bit RGB)
-    private static final int COLOR_KEYWORD  = 0x8C3B14; // Deep Terracotta / Rust Brown
-    private static final int COLOR_TYPE     = 0x2B5B84; // Deep Ink Blue
-    private static final int COLOR_METHOD   = 0x6E4A25; // Warm Coffee Brown
-    private static final int COLOR_STRING   = 0x3B6B35; // Olive Forest Green
-    private static final int COLOR_NUMBER   = 0xA0522D; // Sienna Warm Brown
-    private static final int COLOR_COMMENT  = 0x928275; // Muted Sepia Gray
-    private static final int COLOR_OPERATOR = 0x5C4033; // Dark Umber Brown
-    private static final int COLOR_PUNCT    = 0x705040; // Warm Chestnut
-    private static final int COLOR_ANNOT    = 0xB85D18; // Warm Amber / Copper
-    private static final int COLOR_DEFAULT  = 0x3D322C; // Dark Espresso Text
+    // Tokyo Purple Light Palette Foreground Colors (24-Bit RGB)
+    private static final int COLOR_KEYWORD  = 0x7E22CE; // Vibrant Purple / Violet
+    private static final int COLOR_TYPE     = 0x0284C7; // Deep Sky Blue
+    private static final int COLOR_METHOD   = 0x6B21A8; // Deep Royal Purple
+    private static final int COLOR_STRING   = 0x15803D; // Rich Emerald Green
+    private static final int COLOR_NUMBER   = 0xC2410C; // Warm Burnt Orange
+    private static final int COLOR_COMMENT  = 0x8B7A9F; // Soft Lavender Gray
+    private static final int COLOR_OPERATOR = 0x581C87; // Dark Purple Umber
+    private static final int COLOR_PUNCT    = 0x9333EA; // Bright Purple
+    private static final int COLOR_ANNOT    = 0xB45309; // Warm Amber Gold
+    private static final int COLOR_DEFAULT  = 0x332940; // Deep Dark Violet Text
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -38,7 +38,7 @@ public class Demo {
             import java.util.List;
 
             /**
-             * FastTokenize Warm Paper Light Theme Highlighting Demo
+             * FastTokenize Tokyo Purple Light Theme Highlighting Demo
              */
             public class UserProcessor {
                 private static final int MAX_COUNT = 100;
@@ -62,7 +62,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Warm Paper Light Theme ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Tokyo Purple Light Theme ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
         String codeBgCode = FastANSI.bg(PAPER_BG_R, PAPER_BG_G, PAPER_BG_B);
@@ -73,13 +73,13 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with warm sepia background (#E8DFD8)
+            // 1. Gutter / Line Number with deeper pastel purple background (#E9E1F3)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x92, 0x82, 0x75))
+                         .append(FastANSI.fg(0x8B, 0x7A, 0x9F))
                          .append(String.format(" %2d | ", lineNum++))
                          .append(resetCode);
 
-            // 2. Code Area with Warm Creamy Paper Background (#F5EFEB)
+            // 2. Code Area with Tokyo Purple Light Pastel Background (#F4F0F9)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
