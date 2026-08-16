@@ -33,22 +33,22 @@ public class Demo {
         System.out.println("=================================================\n");
 
         String javaCode = """
-            package com.example.service;
+package com.example.service;
 
-            import java.util.List;
+import java.util.List;
 
-            /**
-             * FastTokenize Catppuccin Cappuccino Dark Highlighting Demo
-             */
-            public class UserProcessor {
-                private static final int MAX_COUNT = 100;
-                private final String name = "Antigravity";
+/**
+ * FastTokenize Catppuccin Cappuccino Dark Highlighting Demo
+ */
+public class UserProcessor {
+    private static final int MAX_COUNT = 100;
+    private final String name = "Antigravity";
 
-                @Override
-                public String toString() {
-                    return "Processor[" + this.name + "] count: " + MAX_COUNT;
-                }
-            }""";
+    @Override
+    public String toString() {
+        return "Processor[" + this.name + "] count: " + MAX_COUNT;
+    }
+}""".trim();
 
         System.out.println("--- 1. Auto-Detect Language & Tokenize Java File (UserProcessor.java) ---");
         List<Token> tokens = FastTokenize.tokenizeForFile("UserProcessor.java", javaCode);
@@ -68,10 +68,13 @@ public class Demo {
         String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
-        String[] lines = javaCode.split("\n", -1);
+        String[] lines = javaCode.split("\\r?\\n");
         int lineNum = 1;
 
         for (String line : lines) {
+            // Filter out any empty trailing line if present
+            if (line.isEmpty() && lineNum > lines.length) continue;
+
             // 1. Gutter / Line Number with dark crust background (#181825)
             coloredOutput.append(gutterBgCode)
                          .append(FastANSI.fg(0x6C, 0x70, 0x86))
