@@ -5,30 +5,32 @@ import java.util.List;
 
 public class Demo {
 
-    // Extra Rich & Vivid Tokyo Night Blue Background (RGB: #1E2238 - Rich Slate Navy Blue)
-    private static final int BG_R = 0x1E;
-    private static final int BG_G = 0x22;
-    private static final int BG_B = 0x38;
+    // Exact CreamCLI Theme Colors (Active default theme in CreamCLI is Rosé Pine Moon 0x232136)
+    // Editor Background: 0x232136 (#232136 - Deep Rosé Pine Night Navy)
+    // Gutter Background: 0x1B192B (#1B192B - Darker Sidebar Navy)
 
-    // Gutter Background (Deeper Rich Blue #161828)
-    private static final int GUTTER_BG_R = 0x16;
-    private static final int GUTTER_BG_G = 0x18;
-    private static final int GUTTER_BG_B = 0x28;
+    private static final int BG_R = 0x23;
+    private static final int BG_G = 0x21;
+    private static final int BG_B = 0x36;
 
-    // Exact CreamCLI TokyoNightTheme RGB Constants
-    private static final int COLOR_KEYWORD  = 0xBB9AF7; // Light Violet
-    private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
-    private static final int COLOR_METHOD   = 0x7AA2F7; // Soft Blue
-    private static final int COLOR_FIELD    = 0x73DACA; // Teal
-    private static final int COLOR_STRING   = 0x9ECE6A; // Soft Green
-    private static final int COLOR_NUMBER   = 0xFF9E64; // Orange
-    private static final int COLOR_COMMENT  = 0x565F89; // Blue-Gray
-    private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
-    private static final int COLOR_PUNCT    = 0x9ABDF5; // Soft Purple Blue
-    private static final int COLOR_ANNOT    = 0xE0AF68; // Yellow
-    private static final int COLOR_THIS     = 0xF7768E; // Pinkish Red
-    private static final int COLOR_CONSTANT = 0xBB9AF7; // Light Violet
-    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Foreground Blue-White
+    private static final int GUTTER_BG_R = 0x1B;
+    private static final int GUTTER_BG_G = 0x19;
+    private static final int GUTTER_BG_B = 0x2B;
+
+    // Exact CreamCLI RosePineMoonTheme RGB Constants
+    private static final int COLOR_KEYWORD  = 0x3E8FB0; // Pine Teal / Blue Accent
+    private static final int COLOR_TYPE     = 0xE49996; // Soft Rose Type
+    private static final int COLOR_METHOD   = 0xEB6F92; // Rose Pink Method
+    private static final int COLOR_FIELD    = 0xFDA5FF; // Soft Violet Field
+    private static final int COLOR_STRING   = 0xF6C177; // Warm Gold String
+    private static final int COLOR_NUMBER   = 0xEA9A97; // Coral Orange Number
+    private static final int COLOR_COMMENT  = 0x6E6A86; // Muted Purple-Gray Comment
+    private static final int COLOR_OPERATOR = 0x908CAA; // Slate Gray Operator
+    private static final int COLOR_PUNCT    = 0x908CAA; // Slate Gray Punctuation
+    private static final int COLOR_ANNOT    = 0x3E8FB0; // Pine Teal
+    private static final int COLOR_THIS     = 0x3D8BAA; // Deep Teal This
+    private static final int COLOR_CONSTANT = 0x3E8FB0; // Pine Teal Constant
+    private static final int COLOR_DEFAULT  = 0xE0DEF4; // Main Text Soft Off-White
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -40,7 +42,7 @@ public class Demo {
                 "import java.util.List;\n" +
                 "\n" +
                 "/**\n" +
-                " * FastTokenize CreamCLI Tokyo Night Highlighting Demo\n" +
+                " * FastTokenize CreamCLI Highlighting Demo (Rosé Pine Moon Theme)\n" +
                 " */\n" +
                 "public class UserProcessor {\n" +
                 "    private static final int MAX_COUNT = 100;\n" +
@@ -63,7 +65,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. CreamCLI Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. CreamCLI Rosé Pine Moon ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
         String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
@@ -74,12 +76,12 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with CreamCLI Tokyo Night gutter background
+            // 1. Gutter / Line Number with CreamCLI Rosé Pine Moon gutter background
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x59, 0x64, 0x91)) // Editor line numbers color
+                         .append(FastANSI.fg(0x6E, 0x6A, 0x86)) // Editor line numbers color
                          .append(String.format(" %2d | ", lineNum++));
 
-            // 2. Code Area with CreamCLI Tokyo Night Editor background
+            // 2. Code Area with CreamCLI Rosé Pine Moon Editor background (0x232136)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
@@ -99,8 +101,7 @@ public class Demo {
                     int g = (rgb >> 8) & 0xFF;
                     int b = rgb & 0xFF;
 
-                    // Apply foreground color AND re-enforce background color per token to prevent terminal reset overrides
-                    coloredOutput.append(codeBgCode).append(FastANSI.fg(r, g, b));
+                    coloredOutput.append(FastANSI.fg(r, g, b));
                     if (t.getType() == TokenType.KEYWORD) {
                         coloredOutput.append(FastANSI.BOLD);
                     } else if (t.getType() == TokenType.THIS || t.getType() == TokenType.CONSTANT) {
