@@ -10,6 +10,11 @@ public class Demo {
     private static final int BG_G = 0x1B;
     private static final int BG_B = 0x26;
 
+    // Gutter Background (Slightly darker #16161E for elegant editor container)
+    private static final int GUTTER_BG_R = 0x16;
+    private static final int GUTTER_BG_G = 0x16;
+    private static final int GUTTER_BG_B = 0x1E;
+
     // Tokyo Night Palette Foreground Colors (24-Bit RGB)
     private static final int COLOR_KEYWORD  = 0x9D7CD8; // Purple/Violet
     private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
@@ -59,7 +64,8 @@ public class Demo {
 
         System.out.println("\n--- 2. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
 
-        String bgCode = FastANSI.bg(BG_R, BG_G, BG_B);
+        String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
+        String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
         String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
@@ -67,11 +73,14 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            coloredOutput.append(bgCode);
+            // 1. Gutter / Line Number with darker background (#16161E)
+            coloredOutput.append(gutterBgCode)
+                         .append(FastANSI.fg(0x56, 0x5F, 0x89))
+                         .append(String.format(" %2d | ", lineNum++))
+                         .append(resetCode);
 
-            // Gutter / Line number in muted gray
-            coloredOutput.append(FastANSI.fg(0x56, 0x5F, 0x89))
-                         .append(String.format(" %2d | ", lineNum++));
+            // 2. Code Area with Tokyo Night Dark Editor background (#1A1B26)
+            coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
             boolean isCommentLine = trimmed.startsWith("/*") || trimmed.startsWith("/**") || trimmed.startsWith("*") || trimmed.startsWith("*/") || trimmed.startsWith("//");
