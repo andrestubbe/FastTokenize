@@ -22,26 +22,37 @@ FastTokenize is a **high-performance, zero-dependency Java tokenization library*
 import fasttokenize.FastTokenize;
 import fasttokenize.Language;
 import fasttokenize.Token;
-import java.util.List;
+import fasttokenize.TokenType;
+import fastterminal.FastTerminalScene;
+import cream.cli.view.editor.EditorCodeLine;
 
-public class Demo {
-    public static void main(String[] args) {
-        String code = """
-            public class HelloWorld {
-                public static void main(String[] args) {
-                    System.out.println("Hello, FastTokenize!");
-                }
-            }
-            """;
+public class CreamCliTerminalRendererDemo {
+    public static void renderCreamCodeLine(FastTerminalScene scene, String filename, String lineText, int lineY) {
+        // 1. Instantly tokenize line into zero-allocation style/type IDs
+        byte[] typeIds = FastTokenize.tokenizeStyles(Language.fromFilename(filename), lineText);
 
-        // 1. Tokenize for Java
-        List<Token> tokens = FastTokenize.tokenize(Language.JAVA, code);
-        for (Token t : tokens) {
-            System.out.println(t.getType() + " => " + t.getText());
+        // 2. Direct cell-by-cell write into FastTerminal double-buffered scene
+        for (int col = 0; col < lineText.length(); col++) {
+            int codePoint = lineText.codePointAt(col);
+            byte typeId = typeIds[col];
+
+            // Resolve color palette from TokenType ID
+            int fgColor = resolveColorForType(typeId);
+            int bgColor = -2; // Transparent background
+
+            scene.writeCell(col, lineY, codePoint, fgColor, bgColor);
         }
+    }
 
-        // 2. High-speed zero-allocation style byte-array for CreamCLI / FastTerminal
-        byte[] styleIds = FastTokenize.tokenizeStyles(Language.JAVA, code);
+    private static int resolveColorForType(byte typeId) {
+        return switch (TokenType.values()[typeId]) {
+            case KEYWORD     -> 0x569CD6; // Blue
+            case STRING      -> 0xCE9178; // Orange/Brown
+            case NUMBER      -> 0xB5CEA8; // Light Green
+            case COMMENT     -> 0x6A9955; // Dark Green
+            case ANNOTATION  -> 0x4EC9B0; // Cyan
+            default          -> 0xD4D4D4; // Default Text
+        };
     }
 }
 ```
@@ -148,6 +159,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## Related Projects
 
+- **[Cream-CLI](https://github.com/andrestubbe/Cream-CLI)** — Next-generation command-line workspace (Terminal + File Explorer + AI Shell).
 - **[FastTerminal](https://github.com/andrestubbe/FastTerminal)** — High-performance double-buffered TUI terminal engine.
 - **[FastFileIndex](https://github.com/andrestubbe/FastFileIndex)** — Native mmap file indexing engine.
 - **[FastCore](https://github.com/andrestubbe/FastCore)** — Unified JNI loader and platform abstraction.
