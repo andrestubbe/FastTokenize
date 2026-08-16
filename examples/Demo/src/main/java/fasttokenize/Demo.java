@@ -46,8 +46,8 @@ public class Demo {
             }
             """;
 
-        System.out.println("--- 1. High-Speed Tokenization & Zero-Allocation Byte Stream ---");
-        List<Token> tokens = FastTokenize.tokenize(Language.JAVA, javaCode);
+        System.out.println("--- 1. Auto-Detect Language & Tokenize Java File (UserProcessor.java) ---");
+        List<Token> tokens = FastTokenize.tokenizeForFile("UserProcessor.java", javaCode);
         byte[] styles = FastTokenize.tokenizeStyles(Language.JAVA, javaCode);
 
         System.out.println("Extracted " + tokens.stream().filter(t -> t.getType() != TokenType.WHITESPACE).count() + " tokens & generated " + styles.length + " zero-allocation style byte IDs.\n");
@@ -57,14 +57,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Auto-Detect Language from Filename (.cpp) ---");
-        String cppCode = "#include <iostream>\nint main() { std::cout << \"FastTokenize AVX2\"; return 0; }";
-        List<Token> cppTokens = FastTokenize.tokenizeForFile("main.cpp", cppCode);
-        cppTokens.stream()
-            .filter(t -> t.getType() != TokenType.WHITESPACE)
-            .forEach(t -> System.out.printf("[%12s] %s%n", t.getType(), t.getText()));
-
-        System.out.println("\n--- 3. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
 
         String bgCode = FastANSI.bg(BG_R, BG_G, BG_B);
         String resetCode = FastANSI.RESET;
