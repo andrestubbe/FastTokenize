@@ -5,27 +5,27 @@ import java.util.List;
 
 public class Demo {
 
-    // Tokyo Night Dark Background (24-Bit RGB: #1A1B26)
-    private static final int BG_R = 0x1A;
-    private static final int BG_G = 0x1B;
-    private static final int BG_B = 0x26;
+    // Tokyo Night Storm Deep Midnight Blue Background (24-Bit RGB: #24283B)
+    private static final int BG_R = 0x24;
+    private static final int BG_G = 0x28;
+    private static final int BG_B = 0x3B;
 
-    // Tokyo Night Gutter Background (#16161E)
-    private static final int GUTTER_BG_R = 0x16;
-    private static final int GUTTER_BG_G = 0x16;
-    private static final int GUTTER_BG_B = 0x1E;
+    // Gutter Background (Slightly darker rich navy blue #1F2335)
+    private static final int GUTTER_BG_R = 0x1F;
+    private static final int GUTTER_BG_G = 0x23;
+    private static final int GUTTER_BG_B = 0x35;
 
-    // Tokyo Night Standard Palette Colors (24-Bit RGB)
-    private static final int COLOR_KEYWORD  = 0x9D7CD8; // Tokyo Night Violet / Purple
-    private static final int COLOR_TYPE     = 0x2AC3DE; // Tokyo Night Cyan
-    private static final int COLOR_METHOD   = 0x7AA2F7; // Tokyo Night Blue
-    private static final int COLOR_STRING   = 0x9ECE6A; // Tokyo Night Green
-    private static final int COLOR_NUMBER   = 0xFF9E64; // Tokyo Night Orange
-    private static final int COLOR_COMMENT  = 0x565F89; // Tokyo Night Comment Muted Blue-Gray
-    private static final int COLOR_OPERATOR = 0x89DDFF; // Tokyo Night Light Cyan
-    private static final int COLOR_PUNCT    = 0xBB9AF7; // Tokyo Night Light Purple
-    private static final int COLOR_ANNOT    = 0xE0AF68; // Tokyo Night Yellow
-    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Tokyo Night Foreground Soft Blue-White
+    // Tokyo Night Storm Palette Colors (24-Bit RGB)
+    private static final int COLOR_KEYWORD  = 0xBB9AF7; // Bright Violet
+    private static final int COLOR_TYPE     = 0x2AC3DE; // Vivid Cyan / Sky Blue
+    private static final int COLOR_METHOD   = 0x7AA2F7; // Rich Sapphire Blue
+    private static final int COLOR_STRING   = 0x9ECE6A; // Vibrant Soft Green
+    private static final int COLOR_NUMBER   = 0xFF9E64; // Tokyo Orange
+    private static final int COLOR_COMMENT  = 0x565F89; // Muted Steel Blue Gray
+    private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
+    private static final int COLOR_PUNCT    = 0xBB9AF7; // Light Purple
+    private static final int COLOR_ANNOT    = 0xE0AF68; // Warm Yellow Gold
+    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Bright Foreground Ice Blue
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -37,7 +37,7 @@ public class Demo {
                 "import java.util.List;\n" +
                 "\n" +
                 "/**\n" +
-                " * FastTokenize Tokyo Night Dark Highlighting Demo\n" +
+                " * FastTokenize Tokyo Night Storm Highlighting Demo\n" +
                 " */\n" +
                 "public class UserProcessor {\n" +
                 "    private static final int MAX_COUNT = 100;\n" +
@@ -60,7 +60,7 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Tokyo Night Dark ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Tokyo Night Storm Deep Blue ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
         String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
@@ -71,13 +71,13 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with dark gutter background (#16161E)
+            // 1. Gutter / Line Number with navy blue background (#1F2335)
             coloredOutput.append(gutterBgCode)
                          .append(FastANSI.fg(0x56, 0x5F, 0x89))
                          .append(String.format(" %2d | ", lineNum++))
                          .append(resetCode);
 
-            // 2. Code Area with Tokyo Night Dark Background (#1A1B26)
+            // 2. Code Area with Tokyo Night Storm Deep Blue Background (#24283B)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
