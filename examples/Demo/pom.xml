@@ -20,6 +20,11 @@
             <artifactId>FastTokenize</artifactId>
             <version>0.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.andrestubbe</groupId>
+            <artifactId>FastANSI</artifactId>
+            <version>0.1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -31,6 +36,14 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>fasttokenize.Demo</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -11,4 +11,4 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-java -cp "target/fasttokenize-demo-0.1.0.jar;../../target/FastTokenize-0.1.0.jar" fasttokenize.Demo
+call mvn -q compile exec:java "-Dexec.mainClass=fasttokenize.Demo"
