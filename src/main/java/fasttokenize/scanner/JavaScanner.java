@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * High-performance lexical scanner for Java and Kotlin.
+ * Matches CreamCLI JavaSyntaxHighlighter logic with METHOD, THIS, CONSTANT, and FIELD awareness.
  */
 public class JavaScanner implements CodeScanner {
 
@@ -97,15 +98,35 @@ public class JavaScanner implements CodeScanner {
                 continue;
             }
 
-            // IDENTIFIER / KEYWORD / TYPE
+            // IDENTIFIER / KEYWORD / TYPE / METHOD / THIS / CONSTANT / FIELD
             if (Character.isJavaIdentifierStart(c)) {
                 int start = i++;
                 while (i < len && Character.isJavaIdentifierPart(source.charAt(i))) i++;
                 CharSequence text = source.subSequence(start, i);
                 String s = text.toString();
 
-                TokenType type = KEYWORDS.contains(s) ? TokenType.KEYWORD :
-                                TYPES.contains(s) ? TokenType.TYPE : TokenType.IDENTIFIER;
+                int nextIdx = i;
+                while (nextIdx < len && Character.isWhitespace(source.charAt(nextIdx))) nextIdx++;
+                boolean isMethodCall = (nextIdx < len && source.charAt(nextIdx) == '(') || (start >= 2 && source.subSequence(start - 2, start).toString().equals("::"));
+                boolean isThisAccess = (start >= 5 && source.subSequence(start - 5, start).toString().equals("this.")) || (start >= 6 && source.subSequence(start - 6, start).toString().equals("super."));
+
+                TokenType type;
+                if (s.equals("this") || s.equals("super")) {
+                    type = TokenType.THIS;
+                } else if (KEYWORDS.contains(s)) {
+                    type = TokenType.KEYWORD;
+                } else if (isThisAccess) {
+                    type = TokenType.FIELD;
+                } else if (isConstantName(s)) {
+                    type = TokenType.CONSTANT;
+                } else if (isMethodCall && !isControlFlowKeyword(s)) {
+                    type = TokenType.METHOD;
+                } else if (TYPES.contains(s) || (s.length() > 1 && Character.isUpperCase(s.charAt(0)) && !isConstantName(s))) {
+                    type = TokenType.TYPE;
+                } else {
+                    type = TokenType.IDENTIFIER;
+                }
+
                 tokens.add(new Token(type, text, start, i));
                 continue;
             }
@@ -131,5 +152,20 @@ public class JavaScanner implements CodeScanner {
         }
 
         return tokens;
+    }
+
+    private static boolean isConstantName(String s) {
+        if (s == null || s.length() < 2) return false;
+        boolean hasUpper = false;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isUpperCase(ch)) hasUpper = true;
+            else if (!Character.isDigit(ch) && ch != '_') return false;
+        }
+        return hasUpper;
+    }
+
+    private static boolean isControlFlowKeyword(String s) {
+        return s.equals("if") || s.equals("for") || s.equals("while") || s.equals("switch") || s.equals("catch");
     }
 }

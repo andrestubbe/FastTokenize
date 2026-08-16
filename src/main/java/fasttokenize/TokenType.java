@@ -18,6 +18,10 @@ public enum TokenType {
     TAG,
     ATTRIBUTE,
     PROPERTY,
+    METHOD,
+    FIELD,
+    CONSTANT,
+    THIS,
     UNKNOWN;
 
     public byte toByteId() {
