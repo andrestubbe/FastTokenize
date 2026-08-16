@@ -5,27 +5,27 @@ import java.util.List;
 
 public class Demo {
 
-    // Tokyo Night Dark Background (24-Bit RGB: #1A1B26)
-    private static final int BG_R = 0x1A;
-    private static final int BG_G = 0x1B;
-    private static final int BG_B = 0x26;
+    // Warm Paper Light Background (RGB: #F5EFEB - Soft Creamy Warm Paper)
+    private static final int PAPER_BG_R = 0xF5;
+    private static final int PAPER_BG_G = 0xEF;
+    private static final int PAPER_BG_B = 0xEB;
 
-    // Gutter Background (Slightly darker #16161E for elegant editor container)
-    private static final int GUTTER_BG_R = 0x16;
-    private static final int GUTTER_BG_G = 0x16;
-    private static final int GUTTER_BG_B = 0x1E;
+    // Gutter Background (Slightly darker warm sepia #E8DFD8)
+    private static final int GUTTER_BG_R = 0xE8;
+    private static final int GUTTER_BG_G = 0xDF;
+    private static final int GUTTER_BG_B = 0xD8;
 
-    // Tokyo Night Palette Foreground Colors (24-Bit RGB)
-    private static final int COLOR_KEYWORD  = 0x9D7CD8; // Purple/Violet
-    private static final int COLOR_TYPE     = 0x2AC3DE; // Cyan
-    private static final int COLOR_METHOD   = 0x7AA2F7; // Blue
-    private static final int COLOR_STRING   = 0x9ECE6A; // Green
-    private static final int COLOR_NUMBER   = 0xFF9E64; // Orange
-    private static final int COLOR_COMMENT  = 0x565F89; // Muted Blue Gray
-    private static final int COLOR_OPERATOR = 0x89DDFF; // Light Cyan
-    private static final int COLOR_PUNCT    = 0xBB9AF7; // Light Purple
-    private static final int COLOR_ANNOT    = 0xE0AF68; // Yellow
-    private static final int COLOR_DEFAULT  = 0xC0CAF5; // Soft Foreground Blue-White
+    // Paper / Warm Sepia Light Palette Foreground Colors (24-Bit RGB)
+    private static final int COLOR_KEYWORD  = 0x8C3B14; // Deep Terracotta / Rust Brown
+    private static final int COLOR_TYPE     = 0x2B5B84; // Deep Ink Blue
+    private static final int COLOR_METHOD   = 0x6E4A25; // Warm Coffee Brown
+    private static final int COLOR_STRING   = 0x3B6B35; // Olive Forest Green
+    private static final int COLOR_NUMBER   = 0xA0522D; // Sienna Warm Brown
+    private static final int COLOR_COMMENT  = 0x928275; // Muted Sepia Gray
+    private static final int COLOR_OPERATOR = 0x5C4033; // Dark Umber Brown
+    private static final int COLOR_PUNCT    = 0x705040; // Warm Chestnut
+    private static final int COLOR_ANNOT    = 0xB85D18; // Warm Amber / Copper
+    private static final int COLOR_DEFAULT  = 0x3D322C; // Dark Espresso Text
 
     public static void main(String[] args) {
         System.out.println("=================================================");
@@ -38,7 +38,7 @@ public class Demo {
             import java.util.List;
 
             /**
-             * FastTokenize Tokyo Night Highlighting Demo
+             * FastTokenize Warm Paper Light Theme Highlighting Demo
              */
             public class UserProcessor {
                 private static final int MAX_COUNT = 100;
@@ -62,10 +62,10 @@ public class Demo {
             }
         }
 
-        System.out.println("\n--- 2. Tokyo Night Full-Editor ANSI Terminal View (FastANSI) ---\n");
+        System.out.println("\n--- 2. Warm Paper Light Theme ANSI Terminal View (FastANSI) ---\n");
 
         String gutterBgCode = FastANSI.bg(GUTTER_BG_R, GUTTER_BG_G, GUTTER_BG_B);
-        String codeBgCode = FastANSI.bg(BG_R, BG_G, BG_B);
+        String codeBgCode = FastANSI.bg(PAPER_BG_R, PAPER_BG_G, PAPER_BG_B);
         String resetCode = FastANSI.RESET;
 
         StringBuilder coloredOutput = new StringBuilder();
@@ -73,13 +73,13 @@ public class Demo {
         int lineNum = 1;
 
         for (String line : lines) {
-            // 1. Gutter / Line Number with darker background (#16161E)
+            // 1. Gutter / Line Number with warm sepia background (#E8DFD8)
             coloredOutput.append(gutterBgCode)
-                         .append(FastANSI.fg(0x56, 0x5F, 0x89))
+                         .append(FastANSI.fg(0x92, 0x82, 0x75))
                          .append(String.format(" %2d | ", lineNum++))
                          .append(resetCode);
 
-            // 2. Code Area with Tokyo Night Dark Editor background (#1A1B26)
+            // 2. Code Area with Warm Creamy Paper Background (#F5EFEB)
             coloredOutput.append(codeBgCode);
 
             String trimmed = line.trim();
@@ -89,7 +89,7 @@ public class Demo {
                 int r = (COLOR_COMMENT >> 16) & 0xFF;
                 int g = (COLOR_COMMENT >> 8) & 0xFF;
                 int b = COLOR_COMMENT & 0xFF;
-                coloredOutput.append(FastANSI.fg(r, g, b)).append(line);
+                coloredOutput.append(FastANSI.fg(r, g, b)).append(FastANSI.ITALIC).append(line);
             } else {
                 List<Token> currentLineTokens = FastTokenize.tokenize(Language.JAVA, line);
                 for (Token t : currentLineTokens) {
