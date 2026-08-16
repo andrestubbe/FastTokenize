@@ -8,12 +8,12 @@
 
 ---
 
-**? Minimal, deterministic tokenizer for code and text structures. Zero-dependency, O(n), with a small and stable
+**⚡ Minimal, deterministic tokenizer for code and text structures. Zero-dependency, O(n), with a small and stable
 TokenType set and language-specific scanners (Java/JSON/XML). Designed for fast preview and analysis pipelines.**
 
 ---
 
-[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
+[![FastTokenize Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
 ---
 
