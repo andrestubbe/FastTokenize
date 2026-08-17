@@ -12,7 +12,7 @@
 
 FastTokenize is a **high-performance, zero-dependency Java tokenization library** and part of the **FastJava ecosystem**. It provides dedicated scanners for 10+ programming languages and formats, outputting structured token streams and zero-allocation byte arrays for `FastTerminal` and terminal text applications.
 
-[![FastTokenize Showcase](docs/screenshot.png)](https://youtu.be/JPG-v0j8Irg)
+[![FastTokenize Showcase](docs/screenshot.png)](https://youtu.be/5VVmsT_05xo)
 
 ---
 
