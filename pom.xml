@@ -7,7 +7,7 @@
 
     <groupId>com.github.andrestubbe</groupId>
     <artifactId>FastTokenize</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
 
     <name>FastTokenize</name>
@@ -50,6 +50,12 @@
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastMemory</artifactId>
             <version>0.1.1</version>
+        </dependency>
+        <!-- FastRegex - Zero-Allocation Regex & Structured Pattern Scanner -->
+        <dependency>
+            <groupId>com.github.andrestubbe</groupId>
+            <artifactId>FastRegex</artifactId>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
