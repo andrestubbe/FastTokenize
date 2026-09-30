@@ -4,6 +4,12 @@
 *.iml
 
 # Build artifacts
-/target/
-/build/
-/out/
+target/
+**/target/
+build/
+**/build/
+out/
+**/out/
+dependency-reduced-pom.xml
+**/dependency-reduced-pom.xml
+Repo/

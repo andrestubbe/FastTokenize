@@ -72,17 +72,17 @@ public class Benchmark {
             """;
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public List<Token> benchmarkJavaTokenization() {
         return FastTokenize.tokenize(Language.JAVA, sampleJavaCode);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public byte[] benchmarkJavaStyleByteStream() {
         return FastTokenize.tokenizeStyles(Language.JAVA, sampleJavaCode);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public List<Token> benchmarkCppTokenization() {
         return FastTokenize.tokenize(Language.CPP, sampleCppCode);
     }
