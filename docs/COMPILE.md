@@ -9,7 +9,7 @@ mvn clean package -DskipTests
 ```
 
 The compiled output will be generated at:
-`target/FastTokenize-0.1.0.jar`
+`target/FastTokenize-0.1.1.jar`
 
 ---
 

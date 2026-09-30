@@ -1,13 +1,41 @@
 @echo off
-echo Building Main Project...
-call mvn clean install -DskipTests -q
+setlocal
+chcp 65001 > nul
+cd /d "%~dp0"
 
-echo Building Benchmark Uber-JAR...
+echo ===================================================
+echo  Building FastTokenize Native & Main Project
+echo ===================================================
+call compile.bat
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] Native build failed!
+    pause
+    exit /b %ERRORLEVEL%
+)
+
+call mvn clean install -DskipTests -q
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] FastTokenize install failed!
+    pause
+    exit /b %ERRORLEVEL%
+)
+
+echo ===================================================
+echo  Building JMH Benchmark Uber-JAR
+echo ===================================================
 cd examples\Benchmark
 call mvn clean package -DskipTests -q
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] Benchmark build failed!
+    cd ..\..
+    pause
+    exit /b %ERRORLEVEL%
+)
 
-echo Running JMH Benchmarks...
-java -jar target\benchmarks.jar -f 1 -i 3 -wi 2 -w 1s -r 1s
+echo ===================================================
+echo  Running JMH Microbenchmarks for FastTokenize
+echo ===================================================
+java --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED -jar target\benchmarks.jar -jvmArgs "-Xmx4g"
 
 cd ..\..
 pause

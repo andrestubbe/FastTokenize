@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
-public class TokenizerBenchmark {
+public class Benchmark {
 
     private String sampleJavaCode;
     private String sampleCppCode;
